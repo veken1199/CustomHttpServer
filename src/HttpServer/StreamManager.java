@@ -188,13 +188,13 @@ public class StreamManager {
 	
 	
 	//this method responsible for locking files
-	private synchronized void lockFile(String filename){
+	public synchronized void lockFile(String filename){
 		this.synchronizedFiles.put(filename.hashCode(), "any");
 	}
 	
 	
 	//this method responsible for unlocking files 
-	private void unlockFile(String filename){
+	public void unlockFile(String filename){
 		this.synchronizedFiles.remove(filename.hashCode());
 	}
 	

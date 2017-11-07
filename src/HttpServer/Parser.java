@@ -34,6 +34,9 @@ public class Parser {
 	// Method responsible for creating the commands 
 	private void createCommands(){
 
+		parser.acceptsAll(asList("help", "h"), "Server help")
+        .withOptionalArg();
+		
 		parser.acceptsAll(asList("p", "port"), "Server Port")
         .withOptionalArg()
         .ofType( Integer.class )
@@ -82,12 +85,12 @@ public class Parser {
 	
 	// Displaying help info
 	public void help(){
-		System.out.println("httpc is a curl-like application but supports HTTP protocol only. \n");
-		System.out.println("Usage: httpc 'command' [arguments]. The commands are:");
-		System.out.println("-get \t executes a HTTP GET request and prints the response.");
-		System.out.println("-post \t executes a HTTP POST request and prints the response.");
-		System.out.println("-help \t prints this screen.");
-		System.out.println("Use 'httpc -help [command]' for more information about a command.");
+		System.out.println("httpf is a simple http server, serves requests to localhost\n");
+		System.out.println("Usage: httpf 'command' [arguments]. The commands are:");
+		System.out.println("-p \t localhost port");
+		System.out.println("-d \t server workdirectory");
+		System.out.println("-v \t <boolean> verbose");
+		System.out.println("Use 'httpf -help ");
 	}	
 }
 

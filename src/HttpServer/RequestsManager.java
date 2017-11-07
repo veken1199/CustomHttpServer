@@ -93,6 +93,7 @@ public class RequestsManager {
 				
 			} catch (Exception e) {
 				System.out.println(e);
+				streamManager.unlockFile(fsl.getServerDirectory()+request_path);
 				return new String[] {"Error occured will writing to the file", "500"};
 			}
 		}
