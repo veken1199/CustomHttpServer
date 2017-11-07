@@ -7,8 +7,6 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import org.json.simple.JSONObject;
-
 public class ServerThreadWorker implements Runnable {
 	
 	private Socket socket;
@@ -48,7 +46,7 @@ public class ServerThreadWorker implements Runnable {
 				this.out.println(response[0]);
 			}
 			else{
-				this.streamManager.returnAttachment(System.getProperty("user.dir") + response[0] ,out);
+				this.streamManager.returnAttachment(response[0] ,out);
 			}
 				
 			this.out.flush();

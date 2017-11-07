@@ -77,7 +77,6 @@ public class Parser {
 			else {
 				System.out.println("\nThe server directory is not availabe, make sure you have inserted a valid directory");
 			}
-			
 		}
 	}
 	

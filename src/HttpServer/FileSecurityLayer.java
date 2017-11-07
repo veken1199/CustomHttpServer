@@ -27,12 +27,12 @@ public class FileSecurityLayer {
 		
 		File directory1 = new File(this.mainDirectory + directory);
 		
-		if(directory1.exists() ){
+		if(directory1.exists()){
 			return true;
 		}
 			
 		else{
-			System.out.print("illegal access to " + directory1);
+			System.out.println("illegal access to " + directory1);
 			return false;
 		}
 	}
