@@ -5,6 +5,7 @@ import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.DatagramChannel;
+import java.util.Hashtable;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Arrays.asList;
@@ -15,6 +16,9 @@ public class UDPRequestsManager extends RequestsManager {
 
 	public DatagramChannel UDPChannel;
 	public ByteBuffer buf;
+	private String connectionState;
+	//we assume all the clients are on the local host
+	private Hashtable<Integer, UDPServerthreadWorker> clientsMap = new Hashtable<Integer, UDPServerthreadWorker>();
 	
 	public void startServer(int port){
 		prepareServer(port);
@@ -27,15 +31,18 @@ public class UDPRequestsManager extends RequestsManager {
 				buf.flip();
 				
 				String payload = new String(packet.getPayload(), UTF_8);
-				System.out.println("Print the content of a packet: " + payload);
+				System.out.println("Print the content of a packet: " + payload + " from address " + packet.getPeerPort());
+				
+				UDPServerthreadWorker udpWorker = clientsMap.containsKey(packet.getPeerPort())?
+						clientsMap.get(packet.getPeerPort()):
+							clientsMap.put(packet.getPeerPort(), new UDPServerthreadWorker(this.UDPChannel, packet));
 				
 				
-				
-				Packet resp = packet.toBuilder()
-	                        .setPayload(payload.getBytes())
-	                        .create();
-	            UDPChannel.send(resp.toBuffer(), router);
-	            
+				udpWorker = clientsMap.get(packet.getPeerPort());
+				udpWorker.receivePacket(packet);
+				Thread udpThread = new Thread(udpWorker);
+				udpThread.start();
+		
 				
 			} catch (IOException e) {
 				System.out.println("ERROR323: Error while receiving packets");
