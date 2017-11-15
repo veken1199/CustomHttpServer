@@ -6,17 +6,13 @@ import java.net.ServerSocket;
 import java.util.Hashtable;
 import java.util.Map;
 
-class Item{
-	public double price;
-	
-}
 public class RequestsManager {	
 	
 	private ServerSocket server;
 	private Socket socket;
 	
 	//Method resposible for creating the server socket and starting it on the machine
-	public void startServer(int port, String Directory){
+	public void startServer(int port){
 		
 		try {
 			this.prepareRequest(port);

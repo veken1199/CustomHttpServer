@@ -40,7 +40,7 @@ public class Parser {
 		parser.acceptsAll(asList("p", "port"), "Server Port")
         .withOptionalArg()
         .ofType( Integer.class )
-		.defaultsTo(50);
+		.defaultsTo(8007);
         
 		parser.acceptsAll(asList("d", "dir", "directory"), "Server Directory")
         .withOptionalArg()
@@ -73,8 +73,12 @@ public class Parser {
 				System.out.println("The server has access to: " + this.opts.valueOf("d").toString());
 				
 				Logger.ALLOWLOGGING = (boolean)this.opts.valueOf("v");
-				this.requests_manager.startServer((int)this.opts.valueOf("p"), this.opts.valueOf("d").toString());
 				
+				if((int)this.opts.valueOf("p") == 8007){
+					this.requests_manager = new UDPRequestsManager();
+				}
+				
+				this.requests_manager.startServer((int)this.opts.valueOf("p"));
 			}
 			
 			else {
