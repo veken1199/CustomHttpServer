@@ -125,7 +125,6 @@ public class WindowManager {
 
 	
 	public void initializeReceiverWindow(int firtPackSeqNumber, int size){
-		System.out.println("initializing : " + size );
 		for(int i = 0; i < size; i++){
 			this.receiverWindow.put(firtPackSeqNumber++, 0); //0 means has not received
 		}
@@ -216,7 +215,6 @@ public class WindowManager {
 				
 			Packet packet = this.packetBuilder(7, packetData, ++packetSequenceNumber);
 			System.out.println("Added the sequence number : " + packet.getSequenceNumber());
-			System.out.println(new String(packet.getPayload()));
 			windowPackets.put((int)packetSequenceNumber, packet);
 		}
 		
