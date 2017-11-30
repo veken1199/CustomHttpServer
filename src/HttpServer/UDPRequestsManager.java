@@ -35,7 +35,6 @@ public class UDPRequestsManager extends RequestsManager {
 				buf.flip();
 				
 				String payload = new String(packet.getPayload());
-				System.out.println("Print the content of a packet: " + payload + " from address " + packet.getPeerPort() + "type " + packet.getType());
 				
 				UDPServerthreadWorker udpWorker = clientsMap.containsKey(packet.getPeerPort())?
 						clientsMap.get(packet.getPeerPort()):

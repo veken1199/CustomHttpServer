@@ -101,8 +101,6 @@ public class StreamManager {
 		String disposition_type = "none";
 		
 		int content_length = 0;
-		
-		logger.addMessage("----------Serving Request " + ServerThreadWorker.request_num++ + "-------------");
 		try{
 			while (loop) {
 				{

@@ -321,4 +321,12 @@ public class WindowManager {
 		}
 		return true;
 	}
+
+	public void senderRetransmitWindow() {
+		for(int i = 0; i < this.WINDOWSIZE; i++){
+			if(this.senderWindow.get((int)this.currentSequenceNumber + i) == 0){
+				this.sendPacket(this.WindowPackets.get((int)this.currentSequenceNumber + i));
+			}
+		}
+	}
 }
