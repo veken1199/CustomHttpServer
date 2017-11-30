@@ -23,3 +23,7 @@
   - java -jar Httpc.jar -post "localhost:50/newFile.txt" -d"content:any content,overwrite:true/false" 
 
 
+  if you don't set the port, UPD server will be activated and it will listen to the localhost:8007
+  
+
+
